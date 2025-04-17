@@ -3,18 +3,14 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
-    [Export]
-    private AnimationPlayer _animationPlayerNode;
-    [Export]
     private Sprite3D _spriteNode;
     private Vector2 _direction = Vector2.Zero;
+    private StateMachine _stateMachine;
 
     public override void _Ready()
     {
-        this._animationPlayerNode = GetNode<AnimationPlayer>("AnimationPlayer");
         this._spriteNode = GetNode<Sprite3D>("Sprite3D");
-
-        this._animationPlayerNode.Play(GameConstants.ANIMATION_IDLE);
+        this._stateMachine = GetParent().GetNode<StateMachine>("StateMachine");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -34,12 +30,12 @@ public partial class Player : CharacterBody3D
 
         if (this._direction != Vector2.Zero)
         {
-            this._animationPlayerNode.Play(GameConstants.ANIMATION_MOVE);
             this._spriteNode.FlipH = this._direction.X < 0;
+            this._stateMachine.ChangeState<PlayerMoveState>();
         }
         else
         {
-            this._animationPlayerNode.Play(GameConstants.ANIMATION_IDLE);
+            this._stateMachine.ChangeState<PlayerIdleState>();
         }
     }
 }
