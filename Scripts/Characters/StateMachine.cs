@@ -16,11 +16,6 @@ public partial class StateMachine : Node
             GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerMoveState"),
             GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerDashState"),
         };
-
-        // this._currentState = this._states[0];
-        // Play animation for the initial state of the Player
-        /* this._playerIdleState = (PlayerIdleState)this._states[0];
-        this._playerIdleState.PlayAnimation(); */
     }
 
     public void ChangeState<T>()
@@ -31,7 +26,7 @@ public partial class StateMachine : Node
         // Check if the new state is the same as the current state
         if (this._currentState is T)
         {
-            GD.Print("Already in the requested state.");
+            // GD.Print("Already in the requested state.");
             return;
         }
 
@@ -51,7 +46,7 @@ public partial class StateMachine : Node
         // If the new state was not found, return
         if (newState == null)
         {
-            GD.Print("Requested state not found.");
+            // GD.Print("Requested state not found.");
             return;
         }
 

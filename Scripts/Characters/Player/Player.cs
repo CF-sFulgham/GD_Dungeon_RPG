@@ -14,7 +14,6 @@ public partial class Player : CharacterBody3D
     private Stopwatch _stopWatch = new Stopwatch();
     private bool _isTimerRunning = false;
     private Timer _dashTimer { get; set; }
-    private Action _onDashTimeout;
 
     public override void _Ready()
     {
@@ -29,7 +28,7 @@ public partial class Player : CharacterBody3D
         {
             this.StopTimer();
             this._dashCount = 0;
-            GD.Print("Restarted");
+            // GD.Print("Restarted");
             return;
         }
 
@@ -46,7 +45,7 @@ public partial class Player : CharacterBody3D
         this._isTimerRunning = true;
         this._stopWatch.Start();
         this._dashCount++;
-        GD.Print("Started Watch");
+        // GD.Print("Started Watch");
     }
 
     public void StopTimer()
@@ -55,7 +54,7 @@ public partial class Player : CharacterBody3D
         this._isTimerRunning = false;
         this._stopWatch.Stop();
         this._stopWatch.Reset();
-        GD.Print("Stopped Watch");
+        // GD.Print("Stopped Watch");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -118,23 +117,23 @@ public partial class Player : CharacterBody3D
     {
         if (this._dashCount == 2)
         {
-            GD.Print("Elapsed: ", this._stopWatch.Elapsed.TotalSeconds);
+            // GD.Print("Elapsed: ", this._stopWatch.Elapsed.TotalSeconds);
             if (!this._isDashing && this._stopWatch.Elapsed.TotalSeconds <= this._dashInterval)
             {
                 this._isDashing = true;
-                GD.Print("Dashing");
+                // GD.Print("Dashing");
                 this._stateMachine.ChangeState<PlayerDashState>();
                 this._dashTimer = new Timer();
                 this._dashTimer.WaitTime = 0.4f;
                 this._dashTimer.OneShot = true;
-                this._dashTimer.Timeout += this._onDashTimeout = () =>
+                this._dashTimer.Timeout += () =>
                 {
                     this._isDashing = false;
                     this._stateMachine.ChangeState<PlayerIdleState>();
                     this._dashTimer.Stop();
                     this._dashTimer.QueueFree();
                     this._dashTimer = null;
-                    GD.Print("Dash Timeout");
+                    // GD.Print("Dash Timeout");
                 };
                 AddChild(this._dashTimer);
                 this._dashTimer.Start();
@@ -145,6 +144,6 @@ public partial class Player : CharacterBody3D
         }
 
         this._dashCount++;
-        GD.Print("Run Tap Count: ", this._dashCount);
+        // GD.Print("Run Tap Count: ", this._dashCount);
     }
 }
