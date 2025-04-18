@@ -3,6 +3,7 @@ public static class GameConstants
     // Animation states
     public const string ANIMATION_IDLE = "Idle";
     public const string ANIMATION_MOVE = "Move";
+    public const string ANIMATION_DASH = "Dash";
 
     // Input actions
     public const string INPUT_LEFT = "ui_left";

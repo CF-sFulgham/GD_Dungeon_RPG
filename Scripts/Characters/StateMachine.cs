@@ -5,7 +5,7 @@ public partial class StateMachine : Node
 {
     private Node _currentState;
     private Node[] _states;
-    private PlayerIdleState _playerIdleState;
+    // private PlayerIdleState _playerIdleState;
 
     public override void _Ready()
     {
@@ -13,13 +13,14 @@ public partial class StateMachine : Node
         this._states = new Node[]
         {
             GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerIdleState"),
-            GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerMoveState")
+            GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerMoveState"),
+            GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerDashState"),
         };
 
-        this._currentState = this._states[0];
+        // this._currentState = this._states[0];
         // Play animation for the initial state of the Player
-        this._playerIdleState = (PlayerIdleState)this._states[0];
-        this._playerIdleState.PlayAnimation();
+        /* this._playerIdleState = (PlayerIdleState)this._states[0];
+        this._playerIdleState.PlayAnimation(); */
     }
 
     public void ChangeState<T>()

@@ -7,10 +7,10 @@
 [node name="Main" type="Node3D"]
 script = ExtResource("1_s0gyx")
 
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_u872a")
+
 [node name="Player" parent="." instance=ExtResource("2_yjsus")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.3687)
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_u872a")
