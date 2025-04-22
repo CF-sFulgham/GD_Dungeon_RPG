@@ -18,3 +18,8 @@ config/icon="uid://cupctmdtk3ki8"
 [dotnet]
 
 project/assembly_name="DungeonRPG"
+
+[layer_names]
+
+3d_physics/layer_1="environment"
+3d_physics/layer_2="player"

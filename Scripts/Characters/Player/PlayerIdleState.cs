@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerIdleState : PlayerBaseState
+public partial class PlayerIdleState : CharacterBaseState
 {
     protected override void PlayAnimation()
     {

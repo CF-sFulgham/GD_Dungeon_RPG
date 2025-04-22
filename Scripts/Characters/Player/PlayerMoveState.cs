@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerMoveState : PlayerBaseState
+public partial class PlayerMoveState : CharacterBaseState
 {
     protected override void PlayAnimation()
     {

@@ -2,12 +2,8 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class Player : CharacterBody3D
+public partial class Player : Character
 {
-    private Sprite3D _spriteNode;
-    private Vector2 _direction = Vector2.Zero;
-    private float _speed = 5.0f;
-    private StateMachine _stateMachine;
     private bool _isDashing = false;
     private double _dashInterval = 0.25f;
     private int _dashCount = 0;
@@ -17,8 +13,7 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
-        this._spriteNode = GetNode<Sprite3D>("Sprite3D");
-        this._stateMachine = GetParent().GetNode<StateMachine>("StateMachine");
+        base._Ready();
         this._stateMachine.ChangeState<PlayerIdleState>();
     }
 

@@ -1,6 +1,6 @@
 using Godot;
 
-public abstract partial class PlayerBaseState : Node
+public abstract partial class CharacterBaseState : Node
 {
     protected AnimationPlayer _animationPlayerNode { get; private set; }
 

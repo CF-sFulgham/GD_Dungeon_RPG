@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bia8ean7yqtrx"]
+[gd_scene load_steps=47 format=3 uid="uid://bia8ean7yqtrx"]
 
 [ext_resource type="Texture2D" uid="uid://8sr7u5fh75h1" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="1_27cb7"]
 [ext_resource type="Script" uid="uid://e0i3surie1x2" path="res://Scripts/Characters/Player/Player.cs" id="1_eiaiy"]
@@ -40,6 +40,22 @@
 [ext_resource type="Texture2D" uid="uid://bfpur7paosd6o" path="res://Assets/Sprites/Characters/Player/Sliding/Sliding_004.png" id="36_yfcdn"]
 [ext_resource type="Texture2D" uid="uid://b5ubketo6sw60" path="res://Assets/Sprites/Characters/Player/Sliding/Sliding_005.png" id="37_68bc3"]
 [ext_resource type="Script" uid="uid://b26c32jhxpe3" path="res://Scripts/Characters/Player/PlayerDashState.cs" id="40_mf3wh"]
+
+[sub_resource type="Animation" id="Animation_2qsty"]
+resource_name = "Dash"
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.168877, 0.333659, 0.502536, 0.668342, 0.833125),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("32_gelu2"), ExtResource("33_uvgfe"), ExtResource("34_e5xbx"), ExtResource("35_8uivy"), ExtResource("36_yfcdn"), ExtResource("37_68bc3")]
+}
 
 [sub_resource type="Animation" id="Animation_ybcsq"]
 resource_name = "Idle"
@@ -90,22 +106,6 @@ tracks/0/keys = {
 "values": [ExtResource("1_27cb7")]
 }
 
-[sub_resource type="Animation" id="Animation_2qsty"]
-resource_name = "Dash"
-step = 0.166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.168877, 0.333659, 0.502536, 0.668342, 0.833125),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("32_gelu2"), ExtResource("33_uvgfe"), ExtResource("34_e5xbx"), ExtResource("35_8uivy"), ExtResource("36_yfcdn"), ExtResource("37_68bc3")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n0rfk"]
 _data = {
 &"Dash": SubResource("Animation_2qsty"),
@@ -114,10 +114,17 @@ _data = {
 &"RESET": SubResource("Animation_n6yol")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gelu2"]
+radius = 0.519399
+
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+floor_max_angle = 1.65806
+floor_snap_length = 0.5
 script = ExtResource("1_eiaiy")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0025
 texture_filter = 0
 texture = ExtResource("1_27cb7")
 
@@ -134,3 +141,7 @@ script = ExtResource("32_4yec0")
 
 [node name="PlayerDashState" type="Node" parent="."]
 script = ExtResource("40_mf3wh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0457716, 0.275044, 0)
+shape = SubResource("CapsuleShape3D_gelu2")
