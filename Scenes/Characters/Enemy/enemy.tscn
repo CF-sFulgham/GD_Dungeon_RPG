@@ -162,3 +162,8 @@ script = ExtResource("57_chosb")
 
 [node name="EnemyAttackState" type="Node" parent="."]
 script = ExtResource("58_m4jgx")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]

@@ -5,18 +5,24 @@ public partial class StateMachine : Node
 {
     private Node _currentState;
     private Node[] _states;
+    private Node _player;
+    private Node _enemy;
 
     public override void _Ready()
     {
+        this._player = GetParent().GetNode<Player>("Player");
+        this._enemy = GetParent().GetNode<Node>("Enemies")
+            .GetNode<Enemy>("Enemy");
+
         // Initialize the state machine with the available states
         this._states = new Node[]
         {
-            GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerIdleState"),
-            GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerMoveState"),
-            GetParent().GetNode<Player>("Player").GetNode<Node>("PlayerDashState"),
-            GetParent().GetNode<Enemy>("Enemy").GetNode<Node>("EnemyIdleState"),
-            GetParent().GetNode<Enemy>("Enemy").GetNode<Node>("EnemyMoveState"),
-            GetParent().GetNode<Enemy>("Enemy").GetNode<Node>("EnemyAttackState"),
+            this._player.GetNode<Node>("PlayerIdleState"),
+            this._player.GetNode<Node>("PlayerMoveState"),
+            this._player.GetNode<Node>("PlayerDashState"),
+            this._enemy.GetNode<Node>("EnemyIdleState"),
+            this._enemy.GetNode<Node>("EnemyMoveState"),
+            this._enemy.GetNode<Node>("EnemyAttackState"),
         };
     }
 
