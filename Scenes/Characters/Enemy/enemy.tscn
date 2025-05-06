@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bd3h84um6frje"]
+[gd_scene load_steps=67 format=3 uid="uid://bd3h84um6frje"]
 
 [ext_resource type="Script" uid="uid://bmqno8nfk2nob" path="res://Scripts/Characters/Enemy/Enemy.cs" id="1_8f48v"]
 [ext_resource type="Texture2D" uid="uid://dh2rffnqoeu5g" path="res://Assets/Sprites/Characters/Enemy Knight/Idle/0_Demons_of_Darkness_Idle_000.png" id="1_b5j75"]
@@ -137,7 +137,16 @@ _data = {
 &"RESET": SubResource("Animation_kb7ur")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8f48v"]
+radius = 4.5
+height = 12.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4tv6t"]
+radius = 0.7
+height = 2.8
+
 [node name="Enemy" type="CharacterBody3D"]
+collision_mask = 3
 script = ExtResource("1_8f48v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -166,4 +175,20 @@ script = ExtResource("58_m4jgx")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="PathPauseTimer" type="Timer" parent="."]
+
+[node name="ChaseTimer" type="Timer" parent="."]
+
+[node name="ChaseArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChaseArea"]
+shape = SubResource("CapsuleShape3D_8f48v")
+
+[node name="AttackArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+shape = SubResource("CapsuleShape3D_4tv6t")
